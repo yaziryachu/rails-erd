@@ -1,0 +1,207 @@
+-- phpMyAdmin SQL Dump
+-- version 3.3.9
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Nov 09, 2023 at 09:26 AM
+-- Server version: 5.5.8
+-- PHP Version: 5.3.5
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `online_petcare`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `login`
+--
+
+CREATE TABLE IF NOT EXISTS `login` (
+  `lid` int(100) NOT NULL AUTO_INCREMENT,
+  `reg_id` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `type` varchar(100) NOT NULL,
+  `status` varchar(100) NOT NULL DEFAULT 'pending',
+  PRIMARY KEY (`lid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `login`
+--
+
+INSERT INTO `login` (`lid`, `reg_id`, `email`, `password`, `type`, `status`) VALUES
+(1, '0', 'admin@gmail.com', 'admin', 'ADMIN', 'approved'),
+(2, '3', 'ram@gmail.com', '123', 'USER', 'approved'),
+(3, '4', 'th@gmail.com', '123', 'USER', 'approved'),
+(4, '1', 'ca@gmail.com', '123', 'DELIVERY_BOY', 'approved'),
+(5, '2', 'pe@gmail.com', '123', 'DELIVERY_BOY', 'approved'),
+(6, '3', 'ab@gmail.com', '123', 'DELIVERY_BOY', 'approved'),
+(7, '5', 'arj@gmail.com', '123', 'USER', 'approved');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pet`
+--
+
+CREATE TABLE IF NOT EXISTS `pet` (
+  `pet_id` int(100) NOT NULL AUTO_INCREMENT,
+  `image` varchar(100) NOT NULL,
+  `pename` varchar(100) NOT NULL,
+  `peprice` varchar(100) NOT NULL,
+  `pestock` varchar(100) NOT NULL,
+  `pedesc` varchar(100) NOT NULL,
+  PRIMARY KEY (`pet_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `pet`
+--
+
+INSERT INTO `pet` (`pet_id`, `image`, `pename`, `peprice`, `pestock`, `pedesc`) VALUES
+(2, 'dog.png', 'Pomarain', '5500', '30', 'Good'),
+(4, 'download (6).jpeg', 'Pershian Cat', '20000', '4', 'Good`'),
+(5, 'download (9).jpeg', 'Labrador Retriever', '12000', '5', 'Good');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `petbooking`
+--
+
+CREATE TABLE IF NOT EXISTS `petbooking` (
+  `peb_id` int(100) NOT NULL AUTO_INCREMENT,
+  `uid` varchar(100) NOT NULL,
+  `pet_id` varchar(100) NOT NULL,
+  `date` varchar(100) NOT NULL,
+  `pet` varchar(100) NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `tstock` varchar(100) NOT NULL,
+  `total` varchar(100) NOT NULL,
+  `supplier` varchar(100) NOT NULL,
+  PRIMARY KEY (`peb_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `petbooking`
+--
+
+INSERT INTO `petbooking` (`peb_id`, `uid`, `pet_id`, `date`, `pet`, `status`, `tstock`, `total`, `supplier`) VALUES
+(4, '3', '2', '2023/Sep/29', 'Pomarain', 'completed', '2', '10000', '1'),
+(6, '3', '4', '2023/Oct/26', 'Pershian Cat', 'incart', '', '', ''),
+(7, '3', '4', '2023/Nov/08', 'Pershian Cat', 'Paid', '1', '20000', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
+--
+
+CREATE TABLE IF NOT EXISTS `product` (
+  `pro_id` int(100) NOT NULL AUTO_INCREMENT,
+  `image` varchar(100) NOT NULL,
+  `proname` varchar(100) NOT NULL,
+  `proprice` varchar(100) NOT NULL,
+  `prostock` varchar(100) NOT NULL,
+  `prodesc` varchar(100) NOT NULL,
+  PRIMARY KEY (`pro_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`pro_id`, `image`, `proname`, `proprice`, `prostock`, `prodesc`) VALUES
+(1, 'download (7).jpeg', 'Himalaya Healthy Pet Food ', '750', '148', 'Good'),
+(3, 'download (8).jpeg', 'Pedigree Adult Dry Dog Food', '700', '200', 'Good'),
+(4, 'download (10).jpeg', 'Signature Grain Zero Adult', '615', '250', 'Good');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `productbooking`
+--
+
+CREATE TABLE IF NOT EXISTS `productbooking` (
+  `prob_id` int(100) NOT NULL AUTO_INCREMENT,
+  `uid` varchar(100) NOT NULL,
+  `pro_id` varchar(100) NOT NULL,
+  `date` varchar(100) NOT NULL,
+  `product` varchar(100) NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `tstock` varchar(100) NOT NULL,
+  `total` varchar(100) NOT NULL,
+  `supplier` varchar(100) NOT NULL,
+  PRIMARY KEY (`prob_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+--
+-- Dumping data for table `productbooking`
+--
+
+INSERT INTO `productbooking` (`prob_id`, `uid`, `pro_id`, `date`, `product`, `status`, `tstock`, `total`, `supplier`) VALUES
+(6, '3', '1', '2023/Sep/30', 'Himalaya Healthy Pet Food', 'completed', '2', '1500', '2'),
+(7, '3', '3', '2023/Sep/30', 'Pedigree Adult Dry Dog Food', 'completed', '50', '35000', '1'),
+(8, '3', '1', '2023/Oct/26', 'Himalaya Healthy Pet Food', 'incart', '', '', ''),
+(9, '3', '3', '2023/Oct/26', 'Pedigree Adult Dry Dog Food', 'incart', '', '', ''),
+(10, '3', '3', '2023/Nov/08', 'Pedigree Adult Dry Dog Food', 'incart', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `supplier`
+--
+
+CREATE TABLE IF NOT EXISTS `supplier` (
+  `sid` int(100) NOT NULL AUTO_INCREMENT,
+  `sname` varchar(100) NOT NULL,
+  `semail` varchar(100) NOT NULL,
+  `sphone` varchar(100) NOT NULL,
+  `slicence` varchar(100) NOT NULL,
+  `saddress` varchar(100) NOT NULL,
+  `sstatus` varchar(100) NOT NULL DEFAULT 'free',
+  PRIMARY KEY (`sid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `supplier`
+--
+
+INSERT INTO `supplier` (`sid`, `sname`, `semail`, `sphone`, `slicence`, `saddress`, `sstatus`) VALUES
+(1, 'Carrier', 'ca@gmail.com', '9382714682', '78546541', 'Kollam', 'free'),
+(2, 'PetHome', 'pe@gmail.com', '9632587841', '76876876', 'Kochi', 'free'),
+(3, 'abrar', 'ab@gmail.com', '9876315811', '01221', 'kochi', 'free');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `uid` int(100) NOT NULL AUTO_INCREMENT,
+  `uname` varchar(100) NOT NULL,
+  `uemail` varchar(100) NOT NULL,
+  `uphone` varchar(100) NOT NULL,
+  `uaddress` varchar(100) NOT NULL,
+  PRIMARY KEY (`uid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`uid`, `uname`, `uemail`, `uphone`, `uaddress`) VALUES
+(3, 'Ram', 'ram@gmail.com', '7946798168', 'Kochi'),
+(4, 'Thomas', 'th@gmail.com', '9317852236', 'Kochi'),
+(5, 'Arjun', 'arj@gmail.com', '7012226060', 'palluruthy');
